@@ -1,0 +1,29 @@
+name: sentry
+version: '8.13.0'
+summary: Stop hoping your users will report errors
+description: |
+  Sentry’s real-time error tracking gives you insight
+  into production deployments and information to reproduce
+  and fix crashes.
+grade: devel
+confinement: strict
+
+apps:
+  sentry:
+    command: sentry
+    plugs:
+      - home
+      - network
+      - network-bind
+
+parts:
+  sentry:
+    plugin: python
+    python-version: python2
+    python-packages:
+      - sentry==8.13.0
+    build-packages:
+      - build-essential
+      - libssl-dev
+      - libffi-dev
+      - python-dev
