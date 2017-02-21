@@ -1,6 +1,6 @@
 name: sentry
 version: '8.13.0'
-summary: Stop hoping your users will report errors
+summary: Sentry is a modern error logging and aggregation platform
 description: |
   Sentry’s real-time error tracking gives you insight
   into production deployments and information to reproduce
