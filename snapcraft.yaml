@@ -5,7 +5,7 @@ description: |
   Sentry’s real-time error tracking gives you insight
   into production deployments and information to reproduce
   and fix crashes.
-grade: devel
+grade: stable
 confinement: strict
 
 apps:
@@ -23,7 +23,8 @@ parts:
     python-packages:
       - sentry==8.13.0
     build-packages:
-      - build-essential
       - libssl-dev
       - libffi-dev
+      - libjpeg-dev
+      - libpq-dev
       - python-dev
