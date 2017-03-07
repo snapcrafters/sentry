@@ -25,6 +25,8 @@ apps:
   worker:
     command: sentry run worker
     daemon: simple
+    environment:
+      C_FORCE_ROOT: 1
     plugs:
       - home
       - network
