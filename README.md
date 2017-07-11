@@ -12,6 +12,7 @@ distributions.</p>
 <a href="https://build.snapcraft.io/user/snapcrafters/fork-and-rename-me"><img src="https://build.snapcraft.io/badge/snapcrafters/fork-and-rename-me.svg" alt="Snap Status"></a>
 </p>
 -->
+<p align="center">Published for <img src="http://anything.codes/slack-emoji-for-techies/emoji/tux.png" align="top" width="24" /> with :gift_heart: by Snapcrafters</p>
 
 ## Install
 
@@ -22,6 +23,8 @@ Before installing, make sure you have the following availiable:
 
 Once you have these running, install Sentry with:
 `sudo snap install sentry`
+
+([Don't have snapd installed?](https://snapcraft.io/docs/core/install))
 
 This will install 4 things:
 
@@ -52,11 +55,7 @@ Afterwards, restart the daemons with:
 
 `sudo systemctl restart "snap.sentry.*"`
 
-Now, you should be able to browse to http://localhost:9000[http://localhost:9000]
-
-([Don't have snapd installed?](https://snapcraft.io/docs/core/install))
-
-<p align="center">Published for <img src="http://anything.codes/slack-emoji-for-techies/emoji/tux.png" align="top" width="24" /> with :gift_heart: by Snapcrafters</p>
+Now, you should be able to browse to [http://localhost:9000](http://localhost:9000)
 
 ## Remaining tasks
 
