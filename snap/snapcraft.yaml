@@ -1,5 +1,5 @@
 name: sentry
-version: '8.17.0'
+version: '8.18.0'
 summary: Sentry is a modern error logging and aggregation platform
 description: |
   Sentry’s real-time error tracking gives you insight
@@ -44,7 +44,7 @@ parts:
     plugin: python
     python-version: python2
     python-packages:
-      - sentry==8.17.0
+      - sentry==8.18.0
     build-packages:
       - libssl-dev
       - libffi-dev
