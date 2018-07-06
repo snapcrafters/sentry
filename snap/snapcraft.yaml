@@ -1,5 +1,5 @@
 name: sentry
-version: '8.22.0'
+version: '9.0'
 summary: Sentry is a modern error logging and aggregation platform
 description: |
   Sentry’s real-time error tracking gives you insight
@@ -45,6 +45,7 @@ parts:
     python-version: python2
     python-packages:
       - sentry==$SNAPCRAFT_PROJECT_VERSION
+      - https://github.com/getsentry/sentry-auth-saml2/archive/master.zip
     build-packages:
       - libssl-dev
       - libffi-dev
