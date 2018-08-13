@@ -54,3 +54,4 @@ parts:
       - python-dev
       - clang
       - build-essential
+      - libxmlsec1-dev
