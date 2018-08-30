@@ -55,3 +55,4 @@ parts:
       - clang
       - build-essential
       - libxmlsec1-dev
+      - cargo
