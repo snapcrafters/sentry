@@ -45,6 +45,7 @@ parts:
     python-version: python2
     python-packages:
       - sentry==$SNAPCRAFT_PROJECT_VERSION
+      - sentry-plugins==$SNAPCRAFT_PROJECT_VERSION
       - https://github.com/getsentry/sentry-auth-saml2/archive/master.zip
     build-packages:
       - libssl-dev
