@@ -47,6 +47,7 @@ parts:
       - sentry==$SNAPCRAFT_PROJECT_VERSION
       - sentry-plugins==$SNAPCRAFT_PROJECT_VERSION
       - https://github.com/getsentry/sentry-auth-saml2/archive/master.zip
+      - https://github.com/getsentry/sentry-auth-github/archive/master.zip
     build-packages:
       - libssl-dev
       - libffi-dev
