@@ -1,4 +1,6 @@
 #!/bin/bash
-set -eu
+set -u
 set -o pipefail
-sentry upgrade
+# Try to ensure we have config first
+$SNAP/command-sentry.wrapper config list >/dev/null 
+if [ $? -eq 0 ]; then $SNAP/command-sentry.wrapper upgrade --noinput; else echo "Missing config, doing nothing"; fi
