@@ -1,5 +1,5 @@
 name: sentry
-version: '9.1.2'
+version: '10.0.0'
 summary: Sentry is a modern error logging and aggregation platform
 description: |
   Sentry’s real-time error tracking gives you insight
