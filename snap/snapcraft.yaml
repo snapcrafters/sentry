@@ -52,7 +52,7 @@ parts:
       - sentry==$SNAPCRAFT_PROJECT_VERSION
       - https://github.com/getsentry/sentry-auth-saml2/archive/master.zip
       - https://github.com/getsentry/sentry-auth-github/archive/master.zip
-      - https://github.com/onelogin/python3-saml/archive/v1.5.0.zip
+      - https://github.com/onelogin/python3-saml/archive/v1.4.1.zip
     build-packages:
       - libssl-dev
       - libffi-dev
