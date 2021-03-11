@@ -1,5 +1,5 @@
 name: sentry
-version: '10.0.0'
+version: '21.2.0'
 summary: Sentry is a modern error logging and aggregation platform
 description: |
   Sentry’s real-time error tracking gives you insight
@@ -15,29 +15,40 @@ architectures:
 
 apps:
   sentry:
-    command: sentry
+    command: bin/sentry
+    environment:
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
     plugs:
       - home
       - network
       - network-bind
   web:
-    command: sentry run web
+    command: bin/sentry run web
+    environment:
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
     daemon: simple
     plugs:
       - home
       - network
       - network-bind
   worker:
-    command: sentry run worker
+    command: bin/sentry run worker
     daemon: simple
     environment:
       C_FORCE_ROOT: 1
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
     plugs:
       - home
       - network
       - network-bind
   cron:
-    command: sentry run cron
+    command: bin/sentry run cron
+    environment:
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
     daemon: simple
     plugs:
       - home
@@ -47,18 +58,50 @@ apps:
 parts:
   sentry:
     plugin: python
-    python-version: python2
     python-packages:
+      - wheel==0.36.2
+      - requests==2.20.0
+      - xmlsec==0.6.1
+      - python-u2flib-server==5.0.1
+      - pyrsistent==0.17.3
+      - grpcio==1.35.0
+      - phabricator==0.6.1
+      - maxminddb==1.5.4
+      - petname==2.6
+      - simplejson==3.11.1
+      - hiredis==0.3.1
+      - PyYAML==5.3.1
+      - mmh3==2.3.1
+      - urllib3==1.24.2
+      - setproctitle==1.1.9
+      - uwsgi==2.0.19.1
+      - parsimonious==0.8.0
+      - grpc-google-iam-v1==0.12.3
+      - googleapis-common-protos==1.52.0
+      - python3-saml==1.4.0
       - sentry==$SNAPCRAFT_PROJECT_VERSION
-      - https://github.com/getsentry/sentry-auth-saml2/archive/master.zip
-      - https://github.com/getsentry/sentry-auth-github/archive/master.zip
     build-packages:
       - libssl-dev
       - libffi-dev
       - libjpeg-dev
       - libpq-dev
-      - python-dev
       - clang
       - build-essential
       - libxmlsec1-dev
       - cargo
+      - pkg-config
+      - python3.6-dev
+      - python3-pip
+      - python3-venv
+      - libpython3-all-dev
+    build-environment:
+      - CPPFLAGS: '$CPPFLAGS -I/usr/include/python3.6m'
+      - CFLAGS: "$CFLAGS -I/usr/include/python3.6m"
+    stage-packages:
+      - libicu60
+      - libpython3.6
+      - libxml2
+      - libxmlsec1
+      - libxmlsec1-openssl
+      - libxslt1.1
+
