@@ -2,7 +2,7 @@ name: sentry
 version: '21.2.0'
 summary: Sentry is a modern error logging and aggregation platform
 description: |
-  Sentry’s real-time error tracking gives you insight
+  Sentry's real-time error tracking gives you insight
   into production deployments and information to reproduce
   and fix crashes.
 grade: stable
@@ -79,6 +79,7 @@ parts:
       - grpc-google-iam-v1==0.12.3
       - googleapis-common-protos==1.52.0
       - python3-saml==1.4.0
+      - setuptools-rust>=0.11.4
       - sentry==$SNAPCRAFT_PROJECT_VERSION
     build-packages:
       - libssl-dev
