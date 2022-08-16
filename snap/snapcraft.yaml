@@ -13,6 +13,10 @@ architectures:
   - build-on: i386
   - build-on: amd64
 
+plugs:
+  shared-memory:
+    private: true
+
 apps:
   sentry:
     command: bin/sentry
