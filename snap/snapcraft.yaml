@@ -7,7 +7,7 @@ description: |
   and fix crashes.
 grade: stable
 confinement: strict
-base: core18
+base: core20
 
 architectures:
   - build-on: i386
@@ -94,16 +94,16 @@ parts:
       - libxmlsec1-dev
       - cargo
       - pkg-config
-      - python3.6-dev
+      - python3.8-dev
       - python3-pip
       - python3-venv
       - libpython3-all-dev
     build-environment:
-      - CPPFLAGS: '$CPPFLAGS -I/usr/include/python3.6m'
-      - CFLAGS: "$CFLAGS -I/usr/include/python3.6m"
+      - CPPFLAGS: '$CPPFLAGS -I/usr/include/python3.8'
+      - CFLAGS: "$CFLAGS -I/usr/include/python3.8"
     stage-packages:
-      - libicu60
-      - libpython3.6
+      - libicu66
+      - libpython3.8
       - libxml2
       - libxmlsec1
       - libxmlsec1-openssl
