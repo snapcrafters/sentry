@@ -1,0 +1,96 @@
+---
+version: '3'
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:5.5.0
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      CONFLUENT_SUPPORT_METRICS_ENABLE: "false"
+      KAFKA_OPTS: "-Dzookeeper.4lw.commands.whitelist=ruok"
+    healthcheck:
+      test: ["CMD-SHELL", "echo 'ruok' | nc -w 2 -q 2 localhost 2181 | grep imok"]
+      interval: 30s
+      timeout: 60s
+      retries: 10
+      start_period: 10s
+
+  kafka:
+    image: confluentinc/cp-kafka:5.5.0
+    container_name: kafka
+    depends_on:
+      zookeeper:
+        condition: service_healthy
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_ADVERTISED_LISTENERS: "PLAINTEXT://kafka:9092"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_OFFSETS_TOPIC_NUM_PARTITIONS: 1
+      CONFLUENT_SUPPORT_METRICS_ENABLE: "false"
+    healthcheck:
+      test: ["CMD-SHELL", "nc -z localhost 9092"]
+      interval: 30s
+      timeout: 60s
+      retries: 10
+      start_period: 10s
+
+  clickhouse:
+    image: yandex/clickhouse-server:20.3.9.70
+    container_name: clickhouse
+    ulimits:
+      nofile:
+        soft: 262144
+        hard: 262144
+    healthcheck:
+      test: ["CMD-SHELL", "http_proxy='' wget -nv -t1 --spider 'http://localhost:8123' || exit 1"]
+      interval: 3s
+      timeout: 600s
+      retries: 200
+
+  redis:
+    image: redis:6.2.4-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    ulimits:
+      nofile:
+        soft: 10032
+        hard: 10032
+    healthcheck:
+      test: redis-cli ping
+      interval: 30s
+      timeout: 60s
+      retries: 10
+      start_period: 10s
+
+  snuba:
+    image: getsentry/snuba:21.5.0
+    container_name: snuba
+    ports:
+      - "1218:1218"
+    depends_on:
+      kafka:
+        condition: service_healthy
+      clickhouse:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      CLICKHOUSE_HOST: clickhouse
+      DEFAULT_BROKERS: 'kafka:9092'
+      REDIS_HOST: redis
+
+  postgres:
+    image: postgres:9.6
+    container_name: postgres
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_DB: sentry
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: pg_isready -U postgres
+      interval: 30s
+      timeout: 60s
+      retries: 10
+      start_period: 10s
