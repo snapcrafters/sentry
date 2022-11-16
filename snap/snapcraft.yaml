@@ -8,7 +8,7 @@ description: |
   and fix crashes.
 grade: stable
 confinement: strict
-base: core18
+base: core20
 
 architectures:
   - build-on: i386
@@ -29,18 +29,18 @@ apps:
       - network
       - network-bind
   web:
+    daemon: simple
     command: bin/sentry run web
     environment:
       LANG: C.UTF-8
       LC_ALL: C.UTF-8
-    daemon: simple
     plugs:
       - home
       - network
       - network-bind
   worker:
-    command: bin/sentry run worker
     daemon: simple
+    command: bin/sentry run worker
     environment:
       C_FORCE_ROOT: 1
       LANG: C.UTF-8
@@ -64,27 +64,19 @@ parts:
   sentry:
     plugin: python
     python-packages:
-      - wheel==0.36.2
-      - requests==2.20.0
-      - xmlsec==0.6.1
-      - python-u2flib-server==5.0.1
-      - pyrsistent==0.17.3
-      - grpcio==1.35.0
-      - phabricator==0.6.1
-      - maxminddb==1.5.4
-      - petname==2.6
-      - simplejson==3.11.1
-      - hiredis==0.3.1
-      - PyYAML==5.3.1
-      - mmh3==2.3.1
-      - urllib3==1.24.2
-      - setproctitle==1.1.9
-      - uwsgi==2.0.19.1
-      - parsimonious==0.8.0
-      - grpc-google-iam-v1==0.12.3
       - googleapis-common-protos==1.52.0
-      - python3-saml==1.4.0
-      - setuptools-rust>=0.11.4
+      - grpc-google-iam-v1==0.12.3
+      - grpcio==1.35.0
+      - hiredis==0.3.1
+      - lxml==4.6.3
+      - parsimonious==0.8.0
+      - petname==2.6
+      - pyrsistent==0.17.3
+      - setproctitle==1.1.9
+      - urllib3==1.24.2
+      - uwsgi==2.0.19.1
+      - wheel==0.36.2
+      - xmlsec==1.0.5
       - sentry==$SNAPCRAFT_PROJECT_VERSION
     build-packages:
       - libssl-dev
@@ -96,16 +88,13 @@ parts:
       - libxmlsec1-dev
       - cargo
       - pkg-config
-      - python3.6-dev
+      - python3.8-dev
+      - python3.8-venv
       - python3-pip
-      - python3-venv
-      - libpython3-all-dev
-    build-environment:
-      - CPPFLAGS: '$CPPFLAGS -I/usr/include/python3.6m'
-      - CFLAGS: "$CFLAGS -I/usr/include/python3.6m"
+      - libpython3.8-dev
     stage-packages:
-      - libicu60
-      - libpython3.6
+      - libicu66
+      - libpython3.8
       - libxml2
       - libxmlsec1
       - libxmlsec1-openssl
