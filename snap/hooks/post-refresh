@@ -1,6 +1,15 @@
 #!/bin/bash
 set -u
 set -o pipefail
+
 # Try to ensure we have config first
-$SNAP/command-sentry.wrapper config list >/dev/null 
-if [ $? -eq 0 ]; then $SNAP/command-sentry.wrapper upgrade --noinput; else echo "Missing config, doing nothing"; fi
+$SNAP/bin/sentry config list >/dev/null
+if [ $? -ne 0 ]; then
+    echo "Sentry is not initialised yet, so there is no need to migrate the database."
+    echo "Exiting and allowing the refresh to continue as normal."
+    exit 0
+fi
+
+echo "Migrating the database"
+$SNAP/bin/sentry upgrade --noinput
+echo "Migration complete."
