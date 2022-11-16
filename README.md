@@ -15,10 +15,19 @@ distributions.</p>
 
 ## Install
 
-Before installing, make sure you have the following availiable:
+Before installing or upgrading, make sure you have the following availiable:
 
 * Postgres database.
 * Redis database.
+* Clickhouse database. (as of 21.5.0)
+* Zookeeper service. (as of 21.5.0)
+* Kafka service. (as of 21.5.0)
+* Snuba API service. (as of 21.5.0)
+
+> An example `docker-compose.yml` is included in thi repository, and within the
+> root directory of the package itself. This is to provide a quick, not suitable
+> for production, way to get the required services running on the same host to
+> test that the snap works.
 
 Once you have these running, install Sentry with:
 `sudo snap install sentry`
