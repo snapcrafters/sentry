@@ -10,6 +10,10 @@ grade: stable
 confinement: strict
 base: core20
 
+assumes:
+- command-chain
+- snapd2.38 # epochs
+
 architectures:
   - build-on: i386
   - build-on: amd64
