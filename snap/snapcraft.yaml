@@ -112,3 +112,11 @@ parts:
       - libxmlsec1-openssl
       - libxslt1.1
 
+  docker-compose-yml:
+    plugin: dump
+    source: .
+    override-pull: |
+      snapcraftctl pull
+      sed -Ei "s|(image: getsentry/snuba):.*|\1:${SNAPCRAFT_PROJECT_VERSION}|" docker-compose.yml
+    stage:
+    - docker-compose.yml
