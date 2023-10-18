@@ -1,6 +1,6 @@
 name: sentry
-version: '21.5.0'
-epoch: 1
+version: '21.6.3'
+epoch: 2*
 summary: Sentry is a modern error logging and aggregation platform
 description: |
   Sentry's real-time error tracking gives you insight
