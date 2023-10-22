@@ -1,5 +1,5 @@
 name: sentry
-version: '23.2.6'
+version: '23.6.2'
 epoch: 3*  # based on https://develop.sentry.dev/self-hosted/releases/#hard-stops
 summary: Sentry is a modern error logging and aggregation platform
 description: |
